@@ -1,6 +1,25 @@
 body {
-  color: green;
+  color: #fb8500;
   padding-left: 15px;
   padding-top: 5px;
+  font-family: 'Open Sans', sans-serif;
+
 }
 
+.btn {
+  background-color: #219ebc;
+  border-color: #219ebc;
+}
+a {
+  color: #f28482;
+  font-weight: 500;
+}
+
+h1, h3 {
+
+  font-weight: 700;
+}
+button {
+  background-color: #8ecae6;
+  border-color: #8ecae6;
+}

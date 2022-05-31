@@ -1,4 +1,16 @@
 
+// initialize the SDK
+braze.initialize('3331ee19-2784-47d6-ae99-11911b4cfd87', {
+  baseUrl: "sondheim.braze.com",
+  enableLogging: true
+});
+// optionally set the current user's External ID
+if (isLoggedIn){
+  braze.changeUser(userIdentifier);
+}
+// Be sure to call `openSession` after `automaticallyShowInAppMessages`
+braze.openSession();
+
 //ALL THE VARIABLES YOU WILL NEED
 var userId, firstName, lastName, email, selectedGender, birthday, country, homeCity, phoneNumber, attributeName, attributeValue, eventName, eventProperties, productId, currencyCode, price, quantity;
 
