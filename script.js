@@ -1,12 +1,15 @@
 
 // initialize the SDK
-braze.initialize('3331ee19-2784-47d6-ae99-11911b4cfd87', {
+  braze.initialize('3331ee19-2784-47d6-ae99-11911b4cfd87', {
   baseUrl: "sondheim.braze.com",
   enableLogging: true
 });
+// optionally show all in-app messages without custom handling
+braze.automaticallyShowInAppMessages();
+
 // optionally set the current user's External ID
 if (isLoggedIn){
-  braze.changeUser(userIdentifier);
+  braze.changeUser(userId);
 }
 // Be sure to call `openSession` after `automaticallyShowInAppMessages`
 braze.openSession();
@@ -33,7 +36,10 @@ document.getElementById("change_user_button").addEventListener("click", function
   //TIP: THE ABOVE LINE IS ASSIGNING THE VALUE IN THE USER ID TEXT BOX TO THE LOCAL VARIABLE userId
   //This is done for every input field
   // TODO ADD CODE HERE.  Pass the userID variable into the change user method
-
+  braze.changeUser(userId);
+  braze.getUser().getUserId(function(userID){
+    console.log('The user is ' + userId);
+  })
 });
 
 var first = document.getElementById("fn_text");
