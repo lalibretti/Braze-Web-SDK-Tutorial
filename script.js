@@ -1,18 +1,10 @@
 
-// initialize the SDK
-  braze.initialize('3331ee19-2784-47d6-ae99-11911b4cfd87', {
-  baseUrl: "sondheim.braze.com",
-  enableLogging: true
-});
-// optionally show all in-app messages without custom handling
-braze.automaticallyShowInAppMessages();
+
 
 // optionally set the current user's External ID
 if (isLoggedIn){
   braze.changeUser(userId);
 }
-// Be sure to call `openSession` after `automaticallyShowInAppMessages`
-braze.openSession();
 
 //ALL THE VARIABLES YOU WILL NEED
 var userId, firstName, lastName, email, selectedGender, birthday, country, homeCity, phoneNumber, attributeName, attributeValue, eventName, eventProperties, productId, currencyCode, price, quantity;
@@ -37,10 +29,12 @@ document.getElementById("change_user_button").addEventListener("click", function
   //This is done for every input field
   // TODO ADD CODE HERE.  Pass the userID variable into the change user method
   braze.changeUser(userId);
-  braze.getUser().getUserId(function(userID){
-    console.log('The user is ' + userId);
-  })
+  
 });
+
+braze.getUser().getUserId(function(userId){
+  console.log('The user is ' + userId);
+})
 
 var first = document.getElementById("fn_text");
 first.addEventListener("keyup", function(event){
@@ -54,8 +48,8 @@ document.getElementById("fn_button").addEventListener("click", function(){
   firstName = document.getElementById("fn_text").value;
 
   // TODO ADD CODE HERE. Pass the firstName variable into the first name set method
-
-});
+  braze.getUser().setfirstName(firstName);
+  });
 
 var last = document.getElementById("ln_text");
 last.addEventListener("keyup", function(event){
@@ -69,6 +63,7 @@ document.getElementById("ln_button").addEventListener("click", function(){
   lastName = document.getElementById("ln_text").value;
 
   // TODO ADD CODE HERE. Pass the lastName variable into the last name set method
+  braze.getUser.setlastName(lastName);
 
 });
 
@@ -84,6 +79,7 @@ document.getElementById("email_button").addEventListener("click", function(){
   email = document.getElementById("email_text").value;
 
   // TODO ADD CODE HERE. Pass the email variable into the email set method
+  braze.getUser().setEmail(email);
 
 });
 
@@ -93,6 +89,7 @@ document.getElementById("gender_button").addEventListener("click", function(){
   selectedGender = x.options[x.selectedIndex].value;
 
   // TODO ADD CODE HERE. Pass the selectedGender variable into the gender method
+  braze.getUser().setGender(selectedGender);
 
 });
 
@@ -104,6 +101,7 @@ document.getElementById("birthday_button").addEventListener("click", function(){
   var year = document.getElementById("birthday").value.substring(0,4);
 
   // TODO ADD CODE HERE (FOLLOW THE DOCUMENTATION CLOSELY!)
+  braze.getUser().setDateOfBirth(year, month, day);
 });
 
 var countryy = document.getElementById("country_text");
@@ -118,6 +116,7 @@ document.getElementById("country_button").addEventListener("click", function(){
   country = document.getElementById("country_text").value;
 
   // TODO ADD CODE HERE
+  braze.getUser().setCountry(country);
 
 });
 
@@ -133,6 +132,7 @@ document.getElementById("home_city_button").addEventListener("click", function()
   homeCity = document.getElementById("home_city_text").value;
 
   // TODO ADD CODE HERE
+  braze.getUser().setHomeCity(homeCity);
 
 });
 
@@ -148,6 +148,7 @@ document.getElementById("phone_number_button").addEventListener("click", functio
   phoneNumber = document.getElementById("phone_number_text").value;
 
   // TODO ADD CODE HERE
+  braze.getUser.setPhoneNumber(phoneNumber);
 
 });
 
@@ -158,6 +159,8 @@ document.getElementById("attribute_button").addEventListener("click", function()
   attributeValue = document.getElementById("attribute_value").value;
 
   // TODO ADD CODE HERE
+  braze.setCustomUserAttribute(attributeName, attributeNumber);
+  braze.incrementCustomUserAttribute(attributeNumber++);
 
 });
 

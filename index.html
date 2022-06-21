@@ -93,6 +93,24 @@
       y.src='https://js.appboycdn.com/web-sdk/4.0/braze.min.js';
       y.async=1;(b=p.getElementsByTagName(P)[0]).parentNode.insertBefore(y,b)
     }(window,document,'script');
+
+    // initialize the SDK
+  braze.initialize('3331ee19-2784-47d6-ae99-11911b4cfd87', {
+    baseUrl: "sondheim.braze.com",
+    enableLogging: true
+  });
+  // optionally show all in-app messages without custom handling
+  braze.automaticallyShowInAppMessages();
+
+  // optionally set the current user's External ID
+if (isLoggedIn){
+  braze.changeUser(userId);
+}
+
+  braze.openSession();
+  braze.getUser().setCustomUserAttribute('visited sample built', new Date());
+
+
   </script>
 </head>
 
@@ -121,7 +139,7 @@
   <br />
   <br />
 
-  <a href="https://sweeney.braze.com/users/user_search/5cf92ce4fbe76a0c3c861e6a" target="_blank">Link to Braze Dashboard</a>
+  <a href="https://sweeney.braze.com/users/user_search/61e8a0327faa5f7482656105?locale=en" target="_blank">Link to Braze Dashboard</a>
 
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
