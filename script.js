@@ -1,6 +1,3 @@
-
-
-
 //ALL THE VARIABLES YOU WILL NEED
 var userId, firstName, lastName, email, selectedGender, birthday, country, homeCity, phoneNumber, attributeName, attributeValue, eventName, eventProperties, productId, currencyCode, price, quantity;
 
