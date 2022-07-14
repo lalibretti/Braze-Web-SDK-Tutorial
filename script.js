@@ -1,11 +1,6 @@
 
 
 
-// optionally set the current user's External ID
-if (isLoggedIn){
-  braze.changeUser(userId);
-}
-
 //ALL THE VARIABLES YOU WILL NEED
 var userId, firstName, lastName, email, selectedGender, birthday, country, homeCity, phoneNumber, attributeName, attributeValue, eventName, eventProperties, productId, currencyCode, price, quantity;
 
@@ -13,7 +8,7 @@ var userId, firstName, lastName, email, selectedGender, birthday, country, homeC
 //THIS CODE SNIPPET (WHICH IS PRESENT WITH EVERY FUNCTION) ALLOWS FOR CLICKING 'ENTER' TO SUBMIT, NO NEED TO TOUCH IT
 var userr = document.getElementById("change_user_text");
 userr.addEventListener("keyup", function(event){
-  if (event.keyCode === 13){
+  if (event.key === 13){
     document.getElementById("change_user_button").click();
   }
 });
@@ -27,18 +22,19 @@ document.getElementById("change_user_button").addEventListener("click", function
   userId = document.getElementById("change_user_text").value;
   //TIP: THE ABOVE LINE IS ASSIGNING THE VALUE IN THE USER ID TEXT BOX TO THE LOCAL VARIABLE userId
   //This is done for every input field
-  // TODO ADD CODE HERE.  Pass the userID variable into the change user method
+  // ADD CODE HERE.  Pass the userID variable into the change user method
+
   braze.changeUser(userId);
-  
+  console.log('changed user to' + userId)
 });
 
 braze.getUser().getUserId(function(userId){
-  console.log('The user is ' + userId);
+  console.log('The user id: ' + userId);
 })
 
 var first = document.getElementById("fn_text");
 first.addEventListener("keyup", function(event){
-  if (event.keyCode === 13){
+  if (event.key === 13){
     document.getElementById("fn_button").click();
   }
 });
@@ -47,13 +43,13 @@ first.addEventListener("keyup", function(event){
 document.getElementById("fn_button").addEventListener("click", function(){
   firstName = document.getElementById("fn_text").value;
 
-  // TODO ADD CODE HERE. Pass the firstName variable into the first name set method
-  braze.getUser().setfirstName(firstName);
+  // ADD CODE HERE. Pass the firstName variable into the first name set method
+  braze.getUser().setFirstName(firstName);
   });
 
 var last = document.getElementById("ln_text");
 last.addEventListener("keyup", function(event){
-  if (event.keyCode === 13){
+  if (event.key === 13){
     document.getElementById("ln_button").click();
   }
 });
@@ -62,14 +58,14 @@ last.addEventListener("keyup", function(event){
 document.getElementById("ln_button").addEventListener("click", function(){
   lastName = document.getElementById("ln_text").value;
 
-  // TODO ADD CODE HERE. Pass the lastName variable into the last name set method
-  braze.getUser.setlastName(lastName);
+  // ADD CODE HERE. Pass the lastName variable into the last name set method
+  braze.getUser().setLastName(lastName);
 
 });
 
 var mail = document.getElementById("email_text");
 mail.addEventListener("keyup", function(event){
-  if (event.keyCode === 13){
+  if (event.key === 13){
     document.getElementById("email_button").click();
   }
 });
@@ -78,20 +74,20 @@ mail.addEventListener("keyup", function(event){
 document.getElementById("email_button").addEventListener("click", function(){
   email = document.getElementById("email_text").value;
 
-  // TODO ADD CODE HERE. Pass the email variable into the email set method
+  // ADD CODE HERE. Pass the email variable into the email set method
   braze.getUser().setEmail(email);
 
 });
 
 //Gender
-document.getElementById("gender_button").addEventListener("click", function(){
-  var x = document.getElementById("gender");
-  selectedGender = x.options[x.selectedIndex].value;
+// document.getElementById("gender_button").addEventListener("click", function(){
+//   var x = document.getElementById("gender");
+//   selectedGender = x.options[x.selectedIndex].value;
 
-  // TODO ADD CODE HERE. Pass the selectedGender variable into the gender method
-  braze.getUser().setGender(selectedGender);
+//   //  ADD CODE HERE. Pass the selectedGender variable into the gender method
+//   braze.getUser().setGender(selectedGender);
 
-});
+// });
 
 //Birthday
 document.getElementById("birthday_button").addEventListener("click", function(){
@@ -100,13 +96,13 @@ document.getElementById("birthday_button").addEventListener("click", function(){
   var day = document.getElementById("birthday").value.substring(8,10);
   var year = document.getElementById("birthday").value.substring(0,4);
 
-  // TODO ADD CODE HERE (FOLLOW THE DOCUMENTATION CLOSELY!)
+  //  ADD CODE HERE (FOLLOW THE DOCUMENTATION CLOSELY!)
   braze.getUser().setDateOfBirth(year, month, day);
 });
 
 var countryy = document.getElementById("country_text");
 countryy.addEventListener("keyup", function(event){
-  if (event.keyCode === 13){
+  if (event.key === 13){
     document.getElementById("country_button").click();
   }
 });
@@ -115,14 +111,14 @@ countryy.addEventListener("keyup", function(event){
 document.getElementById("country_button").addEventListener("click", function(){
   country = document.getElementById("country_text").value;
 
-  // TODO ADD CODE HERE
+  // ADD CODE HERE
   braze.getUser().setCountry(country);
 
 });
 
 var city = document.getElementById("home_city_text");
 city.addEventListener("keyup", function(event){
-  if (event.keyCode === 13){
+  if (event.key === 13){
     document.getElementById("home_city_button").click();
   }
 });
@@ -131,14 +127,14 @@ city.addEventListener("keyup", function(event){
 document.getElementById("home_city_button").addEventListener("click", function(){
   homeCity = document.getElementById("home_city_text").value;
 
-  // TODO ADD CODE HERE
+  //  ADD CODE HERE
   braze.getUser().setHomeCity(homeCity);
 
 });
 
 var number = document.getElementById("phone_number_text");
 number.addEventListener("keyup", function(event){
-  if (event.keyCode === 13){
+  if (event.key === 13){
     document.getElementById("phone_number_button").click();
   }
 });
@@ -147,8 +143,8 @@ number.addEventListener("keyup", function(event){
 document.getElementById("phone_number_button").addEventListener("click", function(){
   phoneNumber = document.getElementById("phone_number_text").value;
 
-  // TODO ADD CODE HERE
-  braze.getUser.setPhoneNumber(phoneNumber);
+  //ADD CODE HERE
+  braze.getUser().setPhoneNumber(phoneNumber);
 
 });
 
@@ -158,9 +154,12 @@ document.getElementById("attribute_button").addEventListener("click", function()
   attributeName = document.getElementById("attribute_name").value;
   attributeValue = document.getElementById("attribute_value").value;
 
-  // TODO ADD CODE HERE
-  braze.setCustomUserAttribute(attributeName, attributeNumber);
-  braze.incrementCustomUserAttribute(attributeNumber++);
+  // TODO ADD CODE HERE-- maybe passing in blank obj to braze
+  console.log("Custom Attibute is "+ attributeName, " Value is " + attributeValue);
+  braze.getUser().setCustomUserAttribute(attributeName, attributeValue);
+  attributeName.value = '';
+  attributeValue.value = '';
+  //braze.incrementCustomUserAttribute(attributeValue++);
 
 });
 
@@ -178,7 +177,10 @@ document.getElementById("event_button").addEventListener("click", function(){
   else
   {
 
-  	// TODO ADD CODE HERE
+    //ADD CODE HERE
+   
+    braze.logCustomEvent(eventName);
+    braze.logCustomEvent(eventProperties);
 
   }
 });
@@ -191,9 +193,21 @@ document.getElementById("log_purchase_button").addEventListener("click", functio
   price = document.getElementById("price").value;
   quantity = document.getElementById("quantity").value;
 
-  // TODO ADD CODE HERE
-
+  //  ADD CODE HERE-need to convert number to correct form of number 
+braze.logPurchase(productId, currencyCode, price, quantity);
+console.log(price);
 });
+
+//Push  registration
+document.getElementById("register".addEventListener("click", function(){
+  submitPushPrompt = document.getElementById('true').value;
+}
+))
+braze.setPushNotificationSubscriptionType(submitPushPrompt);
+
+const pushPromptButton = document.getElementById("push-prompt-button")
+pushPromptButton.addEventListener("click", submitPushPrompt);
+
 
 
 //IGNORE EVERYTHING BELOW! IT IS SIMPLY RESPONSIBLE FOR BUTTON FUNCTION AND TESTING
