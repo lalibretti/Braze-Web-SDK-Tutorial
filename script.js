@@ -1,6 +1,5 @@
 //ALL THE VARIABLES YOU WILL NEED
-var userId, firstName, lastName, email, selectedGender, birthday, country, homeCity, phoneNumber, attributeName, attributeValue, eventName, eventProperties, productId, currencyCode, price, quantity;
-
+var userId, attributeName, attributeValue, eventName, eventProperties;
 
 //THIS CODE SNIPPET (WHICH IS PRESENT WITH EVERY FUNCTION) ALLOWS FOR CLICKING 'ENTER' TO SUBMIT, NO NEED TO TOUCH IT
 var userr = document.getElementById("change_user_text");
@@ -14,20 +13,26 @@ userr.addEventListener("keyup", function(event){
 document.getElementById("change_user_button").addEventListener("click", function(){
   alert("Submission Attempted");
   //TIP: THE ABOVE LINE DISPLAYS AN ALERT ON THE WEBPAGE WHEN YOU HIT THE ENTER KEY OR CLICK SUBMIT FOR User ID
-  //Feel free to add to other methods if you think it's helpful
-
+ 
   userId = document.getElementById("change_user_text").value;
-  //TIP: THE ABOVE LINE IS ASSIGNING THE VALUE IN THE USER ID TEXT BOX TO THE LOCAL VARIABLE userId
-  //This is done for every input field
-  // ADD CODE HERE.  Pass the userID variable into the change user method
+ var identityRequest = {
+      userIdentities: {
+        customerid: userId,    
+      }
+    };
+    mParticle.Identity.login(identityRequest);
+    alert(customerId);
+    window.location.reload();
+  }
+  var submit_userid = document.getElementById('change_user_button').addEventListener('click', changeUser, true);
 
-  braze.changeUser(userId);
-  console.log('changed user to' + userId)
-});
+ // braze.changeUser(userId);
+//   console.log('changed user to' + userId)
+// });
 
-braze.getUser().getUserId(function(userId){
-  console.log('The user id: ' + userId);
-})
+// braze.getUser().getUserId(function(userId){
+//   console.log('The user id: ' + userId);
+// })
 
 var first = document.getElementById("fn_text");
 first.addEventListener("keyup", function(event){
@@ -36,126 +41,133 @@ first.addEventListener("keyup", function(event){
   }
 });
 
-//First Name
-document.getElementById("fn_button").addEventListener("click", function(){
-  firstName = document.getElementById("fn_text").value;
+// //First Name
+// document.getElementById("fn_button").addEventListener("click", function(){
+//   firstName = document.getElementById("fn_text").value;
 
-  // ADD CODE HERE. Pass the firstName variable into the first name set method
-  braze.getUser().setFirstName(firstName);
-  });
+//   // ADD CODE HERE. Pass the firstName variable into the first name set method
+//  // braze.getUser().setFirstName(firstName);
+//  custom
+//   });
 
-var last = document.getElementById("ln_text");
-last.addEventListener("keyup", function(event){
-  if (event.key === 13){
-    document.getElementById("ln_button").click();
-  }
-});
+// var last = document.getElementById("ln_text");
+// last.addEventListener("keyup", function(event){
+//   if (event.key === 13){
+//     document.getElementById("ln_button").click();
+//   }
+// });
 
-//Last Name
-document.getElementById("ln_button").addEventListener("click", function(){
-  lastName = document.getElementById("ln_text").value;
+// //Last Name
+// document.getElementById("ln_button").addEventListener("click", function(){
+//   lastName = document.getElementById("ln_text").value;
 
-  // ADD CODE HERE. Pass the lastName variable into the last name set method
-  braze.getUser().setLastName(lastName);
-
-});
-
-var mail = document.getElementById("email_text");
-mail.addEventListener("keyup", function(event){
-  if (event.key === 13){
-    document.getElementById("email_button").click();
-  }
-});
-
-//Email Address
-document.getElementById("email_button").addEventListener("click", function(){
-  email = document.getElementById("email_text").value;
-
-  // ADD CODE HERE. Pass the email variable into the email set method
-  braze.getUser().setEmail(email);
-
-});
-
-//Gender
-// document.getElementById("gender_button").addEventListener("click", function(){
-//   var x = document.getElementById("gender");
-//   selectedGender = x.options[x.selectedIndex].value;
-
-//   //  ADD CODE HERE. Pass the selectedGender variable into the gender method
-//   braze.getUser().setGender(selectedGender);
+//   // ADD CODE HERE. Pass the lastName variable into the last name set method
+//   braze.getUser().setLastName(lastName);
 
 // });
 
-//Birthday
-document.getElementById("birthday_button").addEventListener("click", function(){
-  birthday = document.getElementById("birthday").value
-  var month = document.getElementById("birthday").value.substring(5,7);
-  var day = document.getElementById("birthday").value.substring(8,10);
-  var year = document.getElementById("birthday").value.substring(0,4);
+// var mail = document.getElementById("email_text");
+// mail.addEventListener("keyup", function(event){
+//   if (event.key === 13){
+//     document.getElementById("email_button").click();
+//   }
+// });
 
-  //  ADD CODE HERE (FOLLOW THE DOCUMENTATION CLOSELY!)
-  braze.getUser().setDateOfBirth(year, month, day);
-});
+// //Email Address
+// document.getElementById("email_button").addEventListener("click", function(){
+//   email = document.getElementById("email_text").value;
 
-var countryy = document.getElementById("country_text");
-countryy.addEventListener("keyup", function(event){
-  if (event.key === 13){
-    document.getElementById("country_button").click();
-  }
-});
+//   // ADD CODE HERE. Pass the email variable into the email set method
+//   braze.getUser().setEmail(email);
 
-//Country
-document.getElementById("country_button").addEventListener("click", function(){
-  country = document.getElementById("country_text").value;
+// });
 
-  // ADD CODE HERE
-  braze.getUser().setCountry(country);
+// //Gender
+// // document.getElementById("gender_button").addEventListener("click", function(){
+// //   var x = document.getElementById("gender");
+// //   selectedGender = x.options[x.selectedIndex].value;
 
-});
+// //   //  ADD CODE HERE. Pass the selectedGender variable into the gender method
+// //   braze.getUser().setGender(selectedGender);
 
-var city = document.getElementById("home_city_text");
-city.addEventListener("keyup", function(event){
-  if (event.key === 13){
-    document.getElementById("home_city_button").click();
-  }
-});
+// // });
 
-//Home City
-document.getElementById("home_city_button").addEventListener("click", function(){
-  homeCity = document.getElementById("home_city_text").value;
+// //Birthday
+// document.getElementById("birthday_button").addEventListener("click", function(){
+//   birthday = document.getElementById("birthday").value
+//   var month = document.getElementById("birthday").value.substring(5,7);
+//   var day = document.getElementById("birthday").value.substring(8,10);
+//   var year = document.getElementById("birthday").value.substring(0,4);
 
-  //  ADD CODE HERE
-  braze.getUser().setHomeCity(homeCity);
+//   //  ADD CODE HERE (FOLLOW THE DOCUMENTATION CLOSELY!)
+//   braze.getUser().setDateOfBirth(year, month, day);
+// });
 
-});
+// var countryy = document.getElementById("country_text");
+// countryy.addEventListener("keyup", function(event){
+//   if (event.key === 13){
+//     document.getElementById("country_button").click();
+//   }
+// });
 
-var number = document.getElementById("phone_number_text");
-number.addEventListener("keyup", function(event){
-  if (event.key === 13){
-    document.getElementById("phone_number_button").click();
-  }
-});
+// //Country
+// document.getElementById("country_button").addEventListener("click", function(){
+//   country = document.getElementById("country_text").value;
 
-//Phone Number
-document.getElementById("phone_number_button").addEventListener("click", function(){
-  phoneNumber = document.getElementById("phone_number_text").value;
+//   // ADD CODE HERE
+//   braze.getUser().setCountry(country);
 
-  //ADD CODE HERE
-  braze.getUser().setPhoneNumber(phoneNumber);
+// });
 
-});
+// var city = document.getElementById("home_city_text");
+// city.addEventListener("keyup", function(event){
+//   if (event.key === 13){
+//     document.getElementById("home_city_button").click();
+//   }
+// });
+
+// //Home City
+// document.getElementById("home_city_button").addEventListener("click", function(){
+//   homeCity = document.getElementById("home_city_text").value;
+
+//   //  ADD CODE HERE
+//   braze.getUser().setHomeCity(homeCity);
+
+// });
+
+// var number = document.getElementById("phone_number_text");
+// number.addEventListener("keyup", function(event){
+//   if (event.key === 13){
+//     document.getElementById("phone_number_button").click();
+//   }
+// });
+
+// //Phone Number
+// document.getElementById("phone_number_button").addEventListener("click", function(){
+//   phoneNumber = document.getElementById("phone_number_text").value;
+
+//   //ADD CODE HERE
+//   braze.getUser().setPhoneNumber(phoneNumber);
+
+// });
+
 
 //CUSTOM ATTRIBUTES
-
 document.getElementById("attribute_button").addEventListener("click", function(){
   attributeName = document.getElementById("attribute_name").value;
   attributeValue = document.getElementById("attribute_value").value;
 
+  mParticle.Identity.getCurrentUser().setUserAttribute(attributeName, attributeValue); 
+  window.location.onreload();
   // TODO ADD CODE HERE-- maybe passing in blank obj to braze
   console.log("Custom Attibute is "+ attributeName, " Value is " + attributeValue);
-  braze.getUser().setCustomUserAttribute(attributeName, attributeValue);
+  //braze.getUser().setCustomUserAttribute(attributeName, attributeValue);
   attributeName.value = '';
   attributeValue.value = '';
+
+  mParticle.Identity.getCurrentUser().setUserAttribute(attributeName, attributeValue); 
+  window.location.onreload();
+
   //braze.incrementCustomUserAttribute(attributeValue++);
 
 });
@@ -165,35 +177,26 @@ document.getElementById("attribute_button").addEventListener("click", function()
 document.getElementById("event_button").addEventListener("click", function(){
   eventName = document.getElementById("event_name").value;
   eventProperties = document.getElementById("properties").value;
-  if(eventProperties === "")
-  {
 
-    // TODO ADD CODE HERE
+  mParticle.logEvent(eventName);
+  window.location.reload();
+  // if(eventProperties === "")
+  // {
 
-  }
-  else
-  {
+  //   // TODO ADD CODE HERE
 
-    //ADD CODE HERE
+  // }
+  // else
+  // {
+
+  //   //ADD CODE HERE
    
-    braze.logCustomEvent(eventName);
-    braze.logCustomEvent(eventProperties);
+  //  // braze.logCustomEvent(eventName);
+  //  // braze.logCustomEvent(eventProperties);
 
   }
 });
 
-//LOG PURCHASES
-
-document.getElementById("log_purchase_button").addEventListener("click", function(){
-  productId = document.getElementById("product_id").value;
-  currencyCode = document.getElementById("currency").value;
-  price = document.getElementById("price").value;
-  quantity = document.getElementById("quantity").value;
-
-  //  ADD CODE HERE-need to convert number to correct form of number 
-braze.logPurchase(productId, currencyCode, price, quantity);
-console.log(price);
-});
 
 //Push  registration
 document.getElementById("register".addEventListener("click", function(){
